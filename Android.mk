@@ -76,7 +76,6 @@ REQD_MASK_POLICY := $(LOCAL_PATH)/reqd_mask
 # policy is to be based. If unspecified, this will build against the current
 # public platform policy in tree
 ifndef BOARD_SEPOLICY_VERS
-$(warning BOARD_SEPOLICY_VERS not specified, assuming current platform version)
 # The default platform policy version.
 BOARD_SEPOLICY_VERS := $(PLATFORM_SEPOLICY_VERSION)
 endif
@@ -943,6 +942,7 @@ vendor_fcfiles_with_nl := $(call add_nl, $(vendor_fc_files), $(built_nl))
 
 $(LOCAL_BUILT_MODULE): PRIVATE_FC_FILES := $(vendor_fcfiles_with_nl)
 $(LOCAL_BUILT_MODULE): PRIVATE_SEPOLICY := $(built_sepolicy)
+$(LOCAL_BUILT_MODULE): PRIVATE_ADDITIONAL_M4DEFS := $(LOCAL_ADDITIONAL_M4DEFS)
 $(LOCAL_BUILT_MODULE): PRIVATE_FC_SORT := $(HOST_OUT_EXECUTABLES)/fc_sort
 $(LOCAL_BUILT_MODULE): $(HOST_OUT_EXECUTABLES)/checkfc $(HOST_OUT_EXECUTABLES)/fc_sort \
 $(vendor_fcfiles_with_nl) $(built_sepolicy)
@@ -970,6 +970,7 @@ odm_fcfiles_with_nl := $(call add_nl, $(odm_fc_files), $(built_nl))
 
 $(LOCAL_BUILT_MODULE): PRIVATE_FC_FILES := $(odm_fcfiles_with_nl)
 $(LOCAL_BUILT_MODULE): PRIVATE_SEPOLICY := $(built_sepolicy)
+$(LOCAL_BUILT_MODULE): PRIVATE_ADDITIONAL_M4DEFS := $(LOCAL_ADDITIONAL_M4DEFS)
 $(LOCAL_BUILT_MODULE): PRIVATE_FC_SORT := $(HOST_OUT_EXECUTABLES)/fc_sort
 $(LOCAL_BUILT_MODULE): $(HOST_OUT_EXECUTABLES)/checkfc $(HOST_OUT_EXECUTABLES)/fc_sort \
 $(odm_fcfiles_with_nl) $(built_sepolicy)
